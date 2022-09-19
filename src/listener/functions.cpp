@@ -8,7 +8,7 @@
  */
 #include "ros/ros.h"
 
-void printChatter(char* msgStr)
+void printChatter(const char* msgStr)
 {
     ROS_INFO("I heard: [%s]", msgStr);
 }
