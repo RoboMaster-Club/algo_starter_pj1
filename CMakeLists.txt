@@ -102,7 +102,7 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+    INCLUDE_DIRS include
 #  LIBRARIES algo_team_starter_pj1
 #  CATKIN_DEPENDS roscpp std_msgs
 #  DEPENDS system_lib
@@ -115,8 +115,8 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
+    include
+    ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -134,8 +134,14 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/algo_team_starter_pj1_node.cpp)
 
+add_executable(listener
+    src/listener/service.cpp
+    src/listener/functions.cpp
+    src/listener/handler.cpp
+)
 add_executable(talker src/talker.cpp)
 target_link_libraries(talker ${catkin_LIBRARIES})
+target_link_libraries(listener ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -181,11 +187,11 @@ target_link_libraries(talker ${catkin_LIBRARIES})
 # )
 
 ## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
-#   PATTERN ".svn" EXCLUDE
-# )
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+  PATTERN ".svn" EXCLUDE
+)
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 # install(FILES
